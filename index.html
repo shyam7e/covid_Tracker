@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Website</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+ <style>
+     body{
+         background-color: black;
+         
+     }
+ </style>
+</head>
+<body>
+  
+
+   <div class="container bg-primary text-white text-center ">
+       <h1 class="p-0 m-0 text-capitalize">covid tracker</h1>
+   </div>
+ <div class="container-fluid text-center text-white bg-dark p-3 text-capitalize"><span>stay home stay safe to fight covid 19</span></div>
+ <div class="container bg-primary text-center text-capitalize text-white p-2">
+    Lets fight covid19
+ </div>
+ <div class="container bg-info text-dark text-center p-2">
+     <h4>Global stats</h4>
+ </div>
+ <div class="container-fluid">
+     <div class="table-responsive">
+         <table id="Globaltable" class="table bg-dark text-white table-bordered"> 
+             <tr>
+                 <th>
+                    NewConfirmed
+                 </th>
+                 <th>
+                    TotalConfirmed
+                 </th>
+                 <th>
+                    TotalDeaths
+                 </th>
+                 <th>
+                    NewRecovered
+                 </th>
+                 <th>
+                    TotalRecovered
+                 </th>
+             </tr>
+
+         </table>
+     </div>
+ </div>
+ <div class="container text-center bg-info text-dark p-2"><h4>Countrywise stats</h4></div>
+<div class="container">
+    <div class="table-responsive">
+        <table id="table" class="table bg-dark table-striped text-white text-capitalize table-bordered">
+           
+            <tr>
+                <th>country</th>
+                <th>new confirmed</th>
+                <th>
+                    TotalConfirmed
+                 </th>
+                 <th>
+                    TotalDeaths
+                 </th>
+                <th>new recovered</th>
+                <th>total recovered</th>
+            </tr>
+        </table>
+        </div>
+</div>
+<div class="bg-dark container-fluid text-secondary text-capitalize text-center p-4">
+    <span id="s"></span>
+   </div>
+
+</body>
+<script>
+    fetch("https://api.covid19api.com/summary")
+    .then(res=>{return res.json();})
+    .then(data=>{
+        //console.log(data);
+        let g=data.Global;
+        let NewConfirmed=document.createElement('td');
+        let TotalConfirmed=document.createElement('td');
+        let TotalDeaths=document.createElement('td');
+        let NewRecovered=document.createElement('td');
+        let TotalRecovered=document.createElement('td');
+        NewConfirmed.innerHTML=`${g.NewConfirmed}`;
+        TotalConfirmed.innerHTML=`${g.TotalConfirmed}`;
+        TotalDeaths.innerHTML=`${g.TotalDeaths}`;
+        NewRecovered.innerHTML=`${g.NewRecovered}`;
+        TotalRecovered.innerHTML=`${g.TotalRecovered}`;
+        let tr=document.createElement('tr');
+        tr.appendChild(NewConfirmed);
+        tr.appendChild(TotalConfirmed);
+        tr.appendChild(TotalDeaths);
+        tr.appendChild(NewRecovered);
+        tr.appendChild(TotalRecovered);
+        document.getElementById("Globaltable").appendChild(tr);
+        for(let i=0;i<248;i++)
+        {
+            //console.log(data.Countries[i].Country);
+            
+        let name=document.createElement('td');
+        let newConfirmed=document.createElement('td');
+        let newRecovered=document.createElement('td');
+        let totalConfirmed=document.createElement('td');
+        let totalDeaths=document.createElement('td');
+        let totalRecovered=document.createElement('td');
+        
+
+        let country=data.Countries[i];
+ name.innerHTML=`${country.Country}`;
+ newConfirmed.innerHTML=`${country.NewConfirmed}`;
+ newRecovered.innerHTML=`${country.NewRecovered}`;
+ totalConfirmed.innerHTML=`${country.TotalConfirmed}`;
+ totalDeaths.innerHTML=`${country.TotalDeaths}`;
+ totalRecovered.innerHTML=`${country.TotalRecovered}`;
+let tr=document.createElement('tr');
+tr.appendChild(name);
+tr.appendChild(newConfirmed);
+tr.appendChild(totalConfirmed);
+tr.appendChild(totalDeaths);
+tr.appendChild(newRecovered);
+tr.appendChild(totalRecovered);
+     document.getElementById("table").appendChild(tr);  
+     document.getElementById("s").innerHTML="designed and developed by shyam m etigatti<br>@copyright shyam m etigatti <br>all rights reserved";
+}
+    }
+    )
+
+
+</script>
+</html>
